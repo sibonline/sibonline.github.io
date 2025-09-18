@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIB Blogs</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+body { font-family:'Poppins',sans-serif; background:#f5f5f5; margin:0; padding:20px;}
+h1 { text-align:center; margin-bottom:20px;}
+.blog-post { background:#fff; padding:20px; border-radius:12px; margin:20px auto; max-width:700px; box-shadow:0 6px 20px rgba(0,0,0,0.1); display:flex; flex-direction:row; align-items:flex-start; gap:15px; position:relative;}
+.blog-post img { width:120px; height:120px; object-fit:cover; border-radius:12px; flex-shrink:0;}
+.blog-post .content { flex:1;}
+.blog-post h2 { margin-top:0;}
+.blog-post small { color:#555; display:block; margin-bottom:8px;}
+.admin-btn { position:absolute; top:10px; right:10px; display:flex; gap:5px;}
+.admin-btn button { padding:5px 10px; border:none; border-radius:6px; cursor:pointer; font-size:0.8rem;}
+.admin-btn button.edit { background:#FFC107; color:#fff;}
+.admin-btn button.delete { background:#FF4C4C; color:#fff;}
+#blog-form { max-width:700px; margin:20px auto; background:#fff; padding:20px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.1); display:none;}
+#blog-form input,#blog-form textarea,#blog-form button { width:100%; margin-bottom:10px; padding:8px; border-radius:6px; border:1px solid #ccc;}
+#blog-form button { background:#007BFF; color:#fff; cursor:pointer; border:none; transition:0.3s;}
+#blog-form button:hover { background:#0056b3;}
+</style>
+</head>
+<body>
+<h1>SIB Blogs</h1>
+<div id="auth">
+<input type="email" id="email" placeholder="Admin Email">
+<input type="password" id="password" placeholder="Password">
+<button id="login">Login</button>
+<button id="logout" style="display:none;">Logout</button>
+</div>
+<div id="blog-form">
+<input type="text" id="title" placeholder="Title" required>
+<input type="text" id="author" placeholder="Author" required>
+<textarea id="content" placeholder="Content" rows="5" required></textarea>
+<input type="text" id="image" placeholder="Image URL (optional)">
+<button id="add-blog">Add Blog</button>
+</div>
+<div id="blogs-container"></div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, onSnapshot, updateDoc, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyBhYQ5C5KgsvpihD_6NneRzqVupdiHImB8",
+authDomain: "sibonlinehubcommunity.firebaseapp.com",
+projectId: "sibonlinehubcommunity",
+storageBucket: "sibonlinehubcommunity.firebasestorage.app",
+messagingSenderId: "715051010435",
+appId: "1:715051010435:web:c51d3994c0b2c0602e4eb6",
+measurementId: "G-P1M7EF6PF6"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const adminEmails = ['meetayaand@gmail.com','meetayaand@Gmail.com'];
+
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const loginBtn = document.getElementById('login');
+const logoutBtn = document.getElementById('logout');
+const blogForm = document.getElementById('blog-form');
+const titleInput = document.getElementById('title');
+const authorInput = document.getElementById('author');
+const contentInput = document.getElementById('content');
+const imageInput = document.getElementById('image');
+const addBlogBtn = document.getElementById('add-blog');
+const blogsContainer = document.getElementById('blogs-container');
+
+let currentUser=null;
+let isAdmin=false;
+
+loginBtn.addEventListener('click',async()=>{try{const cred=await signInWithEmailAndPassword(auth,emailInput.value,passwordInput.value); if(!adminEmails.includes(cred.user.email)){alert('Not admin!'); await signOut(auth);}}catch(e){alert(e.message);}});
+logoutBtn.addEventListener('click',async()=>{await signOut(auth);});
+
+onAuthStateChanged(auth,user=>{currentUser=user; if(user && adminEmails.includes(user.email)){isAdmin=true; blogForm.style.display='block'; logoutBtn.style.display='inline-block'; loginBtn.style.display='none';}else{isAdmin=false; blogForm.style.display='none'; logoutBtn.style.display='none'; loginBtn.style.display='inline-block';}});
+
+addBlogBtn.addEventListener('click',async()=>{if(!titleInput.value||!authorInput.value||!contentInput.value)return alert('Fill all required fields!'); await addDoc(collection(db,'blogs'),{title:titleInput.value,author:authorInput.value,content:contentInput.value,image:imageInput.value||'',timestamp:Date.now()}); titleInput.value=''; authorInput.value=''; contentInput.value=''; imageInput.value='';});
+
+const blogsCol = collection(db,'blogs');
+onSnapshot(blogsCol,snapshot=>{blogsContainer.innerHTML=''; snapshot.forEach(docSnap=>{const data=docSnap.data(); const div=document.createElement('div'); div.classList.add('blog-post'); div.innerHTML=`<img src="${data.image||'Logos/SIB Logo HIGH RES.png'}" alt="${data.title}"><div class="content"><h2>${data.title}</h2><small>By ${data.author}</small><p>${data.content}</p></div>`; if(isAdmin){const btnDiv=document.createElement('div'); btnDiv.classList.add('admin-btn'); const editBtn=document.createElement('button'); editBtn.textContent='Edit'; editBtn.classList.add('edit'); const delBtn=document.createElement('button'); delBtn.textContent='Delete'; delBtn.classList.add('delete'); editBtn.addEventListener('click',()=>{const newTitle=prompt('Title:',data.title); const newAuthor=prompt('Author:',data.author); const newContent=prompt('Content:',data.content); const newImage=prompt('Image URL:',data.image||''); if(newTitle && newAuthor && newContent){updateDoc(doc(db,'blogs',docSnap.id),{title:newTitle,author:newAuthor,content:newContent,image:newImage||''});}}); delBtn.addEventListener('click',()=>{if(confirm('Delete this post?')) deleteDoc(doc(db,'blogs',docSnap.id));}); btnDiv.appendChild(editBtn); btnDiv.appendChild(delBtn); div.appendChild(btnDiv);} blogsContainer.appendChild(div);});});
+</script>
+</body>
+</html>

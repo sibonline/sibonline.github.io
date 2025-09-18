@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>About Us - Student Initiative Board</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header><h1>About the Student Initiative Board</h1></header>
+<nav>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="upcoming.html">Upcoming Events</a>
+<a href="past_events.html">Past Events</a>
+<a href="join.html">Join SIB</a>
+</nav>
+<main>
+<section>
+<h2>Our Mission</h2>
+<p>To create a culture of initiative, collaboration, and leadership by empowering students to bring their ideas to life and contribute meaningfully to the school community.</p>
+</section>
+<section>
+<h2>Our Structure</h2>
+<p>The SIB is currently run by a team of more than 10 members across different sections of Class 9, led from our organisational HQ in 9E. Each member takes on a specific role, ensuring every project is handled with care and precision. Additionally, our Ambassadors represent the Board in their respective sections, helping us stay connected with students across the grade.</p>
+</section>
+</main>
+<footer>© 2025 Student Initiative Board</footer>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  const links=document.querySelectorAll("nav a");
+  links.forEach(link=>{
+    if(link.href === window.location.href){
+      link.classList.add("hidden");
+    }
+    link.addEventListener("click",function(e){
+      e.preventDefault();
+      const href=this.href;
+      document.body.style.opacity="0";
+      setTimeout(()=>{window.location=href},500);
+    });
+  });
+});
+window.onload=function(){document.body.style.opacity="1"}
+</script>
+
+</body>
+</html>

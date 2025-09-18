@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Upcoming Events - Student Initiative Board</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header><h1>Upcoming Events</h1></header>
+<nav>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="upcoming.html">Upcoming Events</a>
+<a href="past_events.html">Past Events</a>
+<a href="join.html">Join SIB</a>
+</nav>
+<main>
+<section class="event">
+<h3>SIB MUN 2</h3>
+<time>Date: Beginning of Term 2 (Tentative) • Time: Activity Period (Tentative)</time>
+<span class="venue">Venue: The Bishop’s Co-Ed School, Undri</span>
+<p>A fully fledged MUN conference right in our school. The SIB MUN Initiative will consist of multiple sessions held in the activity period throughout conference week. Every student gets to participate and represent their country. It fosters skills in public speaking, debate, diplomacy, conflict resolution, negotiation, and more.</p>
+</section>
+<section class="event">
+<h3>SIB Affiliated Class Skit</h3>
+<time>Date: Unscheduled • Time: Activity Period (Tentative)</time>
+<span class="venue">Venue: B2, 1st Floor, Class 9E, The Bishop’s Co-Ed School, Undri</span>
+<p>Only for the students of 9E. A collaborative initiative between the SIB and Shaurya Swarana. A short class skit on the topic of Discipline. Auditions held in class 9E. For more information, contact us via email or speak with Shaurya Swarana.</p>
+</section>
+</main>
+<footer>© 2025 Student Initiative Board</footer>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+  const links=document.querySelectorAll("nav a");
+  links.forEach(link=>{
+    if(link.href === window.location.href){
+      link.classList.add("hidden");
+    }
+    link.addEventListener("click",function(e){
+      e.preventDefault();
+      const href=this.href;
+      document.body.style.opacity="0";
+      setTimeout(()=>{window.location=href},500);
+    });
+  });
+});
+window.onload=function(){document.body.style.opacity="1"}
+</script>
+
+</body>
+</html>
