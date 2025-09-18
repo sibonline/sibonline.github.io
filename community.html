@@ -22,41 +22,39 @@ input,textarea,select { width:100%; padding:8px; margin-bottom:10px; border-radi
 <body>
 <h1>SIB Community</h1>
 <div id="auth">
-<input type="text" id="username" placeholder="Username">
-<input type="email" id="email" placeholder="Email">
-<input type="password" id="password" placeholder="Password">
-<button id="login">Login</button>
-<button id="register">Register</button>
-<button id="logout" style="display:none;">Logout</button>
-<button id="delete-account">Delete My Account</button>
+  <input type="text" id="username" placeholder="Username">
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+  <button id="login">Login</button>
+  <button id="register">Register</button>
+  <button id="logout" style="display:none;">Logout</button>
+  <button id="delete-account">Delete My Account</button>
 </div>
 <div id="comment-form" style="display:none;">
-<textarea id="comment" placeholder="Write your comment..."></textarea>
-<button id="post-comment">Post Comment</button>
+  <textarea id="comment" placeholder="Write your comment..."></textarea>
+  <button id="post-comment">Post Comment</button>
 </div>
 <div id="people-list" style="display:none;">
-<h3>All Users</h3>
-<div id="users-container"></div>
+  <h3>All Users</h3>
+  <div id="users-container"></div>
 </div>
 <div id="comments"></div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
-import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, onAuthStateChanged, signOut, deleteUser } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, deleteUser } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { getFirestore, collection, addDoc, serverTimestamp, onSnapshot, query, orderBy, doc, getDoc, setDoc, updateDoc, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSyBhYQ5C5KgsvpihD_6NneRzqVupdiHImB8",
-authDomain: "sibonlinehubcommunity.firebaseapp.com",
-projectId: "sibonlinehubcommunity",
-storageBucket: "sibonlinehubcommunity.firebasestorage.app",
-messagingSenderId: "715051010435",
-appId: "1:715051010435:web:c51d3994c0b2c0602e4eb6",
-measurementId: "G-P1M7EF6PF6"
+  apiKey: "AIzaSyBhYQ5C5KgsvpihD_6NneRzqVupdiHImB8",
+  authDomain: "sibonlinehubcommunity.firebaseapp.com",
+  projectId: "sibonlinehubcommunity",
+  storageBucket: "sibonlinehubcommunity.firebasestorage.app",
+  messagingSenderId: "715051010435",
+  appId: "1:715051010435:web:c51d3994c0b2c0602e4eb6"
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
@@ -81,103 +79,94 @@ const adminEmails=['meetayaand@gmail.com','meetayaand@Gmail.com'];
 async function checkAdmin(user){ isAdmin=adminEmails.includes(user.email); }
 
 async function loadUsers(){
-usersContainer.innerHTML='';
-const usersSnap=await getDocs(collection(db,'users'));
-usersSnap.forEach(docSnap=>{
-const data=docSnap.data();
-const div=document.createElement('div');
-div.style.border="1px solid #ccc"; div.style.padding="8px"; div.style.margin="5px 0"; div.style.borderRadius="6px";
-const adminTag=adminEmails.includes(data.email)?'<span class="admin-label">Admin</span>':'';
-div.innerHTML=`<strong>${data.displayName||'(no username)'}</strong>${adminTag} | ${data.role||'Member'}`;
-if(isAdmin){
-const nameInputEl=document.createElement('input'); nameInputEl.placeholder='Username'; nameInputEl.value=data.displayName||'';
-const roleSelect=document.createElement('select');
-['Member','Tech Team','CEO','CTO','Executive Board','Marketing','Media Team'].forEach(r=>{
-const opt=document.createElement('option'); opt.value=r; opt.text=r; if(r===data.role) opt.selected=true; roleSelect.appendChild(opt);
-});
-const saveBtn=document.createElement('button'); saveBtn.textContent='Save';
-saveBtn.addEventListener('click',async()=>{
-const password=prompt('Admin password:'); if(password!=='sib@2000') return alert('Wrong password');
-await updateDoc(doc(db,'users',docSnap.id),{displayName:nameInputEl.value,role:roleSelect.value});
-loadUsers();
-});
-div.appendChild(document.createElement('br'));
-div.appendChild(nameInputEl); div.appendChild(roleSelect); div.appendChild(saveBtn);
-}
-usersContainer.appendChild(div);
-});
+  usersContainer.innerHTML='';
+  const usersSnap=await getDocs(collection(db,'users'));
+  usersSnap.forEach(docSnap=>{
+    const data=docSnap.data();
+    const div=document.createElement('div');
+    div.style.border="1px solid #ccc"; div.style.padding="8px"; div.style.margin="5px 0"; div.style.borderRadius="6px";
+    const adminTag=adminEmails.includes(data.email)?'<span class="admin-label">Admin</span>':'';
+    div.innerHTML=`<strong>${data.displayName||'(no username)'}</strong>${adminTag} | ${data.role||'Member'}`;
+    if(isAdmin){
+      const nameInputEl=document.createElement('input'); nameInputEl.placeholder='Username'; nameInputEl.value=data.displayName||'';
+      const roleSelect=document.createElement('select');
+      ['Member','Tech Team','CEO','CTO','Executive Board','Marketing','Media Team'].forEach(r=>{
+        const opt=document.createElement('option'); opt.value=r; opt.text=r; if(r===data.role) opt.selected=true; roleSelect.appendChild(opt);
+      });
+      const saveBtn=document.createElement('button'); saveBtn.textContent='Save';
+      saveBtn.addEventListener('click',async()=>{
+        const password=prompt('Admin password:'); if(password!=='sib@2000') return alert('Wrong password');
+        await updateDoc(doc(db,'users',docSnap.id),{displayName:nameInputEl.value,role:roleSelect.value});
+        loadUsers();
+      });
+      div.appendChild(document.createElement('br')); div.appendChild(nameInputEl); div.appendChild(roleSelect); div.appendChild(saveBtn);
+    }
+    usersContainer.appendChild(div);
+  });
 }
 
 registerBtn.addEventListener('click',async()=>{
-try{
-const cred=await createUserWithEmailAndPassword(auth,emailInput.value,passwordInput.value);
-await setDoc(doc(db,'users',cred.user.uid),{email:cred.user.email,displayName:usernameInput.value,role:'Member'});
-await sendEmailVerification(cred.user);
-alert('Registered! Check your email to verify your account.');
-}catch(e){alert(e.message);}
+  try{
+    const cred=await createUserWithEmailAndPassword(auth,emailInput.value,passwordInput.value);
+    await setDoc(doc(db,'users',cred.user.uid),{email:cred.user.email,displayName:usernameInput.value,role:'Member'});
+    alert('Registered! Login to post comments.');
+  }catch(e){alert(e.message);}
 });
 
 loginBtn.addEventListener('click',async()=>{
-try{
-await signInWithEmailAndPassword(auth,emailInput.value,passwordInput.value);
-}catch(e){alert(e.message);}
+  try{await signInWithEmailAndPassword(auth,emailInput.value,passwordInput.value);}catch(e){alert(e.message);}
 });
 
 logoutBtn.addEventListener('click',async()=>{await signOut(auth);});
 
 onAuthStateChanged(auth,async(user)=>{
-currentUser=user;
-if(user && user.emailVerified){
-commentForm.style.display='block'; logoutBtn.style.display='inline-block'; loginBtn.style.display='none'; registerBtn.style.display='none';
-await checkAdmin(user);
-if(isAdmin) peopleList.style.display='block'; else peopleList.style.display='none';
-if(isAdmin) loadUsers();
-}else{
-commentForm.style.display='none'; logoutBtn.style.display='none'; loginBtn.style.display='inline-block'; registerBtn.style.display='inline-block';
-peopleList.style.display='none';
-}
+  currentUser=user;
+  if(user){
+    commentForm.style.display='block'; logoutBtn.style.display='inline-block'; loginBtn.style.display='none'; registerBtn.style.display='none';
+    await checkAdmin(user);
+    if(isAdmin) peopleList.style.display='block'; else peopleList.style.display='none';
+    if(isAdmin) loadUsers();
+  }else{
+    commentForm.style.display='none'; logoutBtn.style.display='none'; loginBtn.style.display='inline-block'; registerBtn.style.display='inline-block';
+    peopleList.style.display='none';
+  }
 });
 
 postBtn.addEventListener('click',async()=>{
-if(!currentUser) return alert('Login first');
-const msg=commentInput.value.trim(); if(msg==='') return;
-const userRef=doc(db,'users',currentUser.uid);
-const userSnap=await getDoc(userRef);
-let displayName=userSnap.exists()?userSnap.data().displayName:usernameInput.value||'Anonymous';
-let role=adminEmails.includes(currentUser.email)?'Admin':(userSnap.exists()?userSnap.data().role:'Member');
-await addDoc(collection(db,'comments'),{
-user:displayName,
-role:role,
-message:msg,
-timestamp:serverTimestamp()
-});
-commentInput.value='';
+  if(!currentUser) return alert('Login first');
+  const msg=commentInput.value.trim(); if(msg==='') return;
+  const userRef=doc(db,'users',currentUser.uid);
+  const userSnap=await getDoc(userRef);
+  let displayName=userSnap.exists()?userSnap.data().displayName:usernameInput.value||'Anonymous';
+  let role=adminEmails.includes(currentUser.email)?'Admin':(userSnap.exists()?userSnap.data().role:'Member');
+  await addDoc(collection(db,'comments'),{user:displayName,role:role,message:msg,timestamp:serverTimestamp()});
+  commentInput.value='';
 });
 
 const commentsQuery=query(collection(db,'comments'),orderBy('timestamp','asc'));
 onSnapshot(commentsQuery,snapshot=>{
-commentsDiv.innerHTML='';
-snapshot.forEach(docSnap=>{
-const data=docSnap.data();
-const div=document.createElement('div');
-div.classList.add('comment');
-const adminTag=data.role==='Admin'?'<span class="admin-label">Admin</span>':'';
-div.innerHTML=`<small>${data.user}${adminTag} (${data.role}) | ${data.timestamp?.toDate().toLocaleString()||''}</small><p>${data.message}</p>`;
-if(isAdmin){
-const delBtn=document.createElement('button');
-delBtn.textContent='Delete Comment';
-delBtn.addEventListener('click',async()=>{await deleteDoc(doc(db,'comments',docSnap.id));});
-div.appendChild(delBtn);
-}
-commentsDiv.appendChild(div);
-});
+  commentsDiv.innerHTML='';
+  snapshot.forEach(docSnap=>{
+    const data=docSnap.data();
+    const div=document.createElement('div');
+    div.classList.add('comment');
+    const adminTag=data.role==='Admin'?'<span class="admin-label">Admin</span>':'';
+    div.innerHTML=`<small>${data.user}${adminTag} (${data.role}) | ${data.timestamp?.toDate().toLocaleString()||''}</small><p>${data.message}</p>`;
+    if(isAdmin){
+      const delBtn=document.createElement('button');
+      delBtn.textContent='Delete Comment';
+      delBtn.addEventListener('click',async()=>{await deleteDoc(doc(db,'comments',docSnap.id));});
+      div.appendChild(delBtn);
+    }
+    commentsDiv.appendChild(div);
+  });
 });
 
 deleteBtn.addEventListener('click',async()=>{
-if(!currentUser) return alert('Login first');
-if(!confirm('Are you sure to delete your account?')) return;
-await deleteDoc(doc(db,'users',currentUser.uid));
-await deleteUser(currentUser);
+  if(!currentUser) return alert('Login first');
+  if(!confirm('Are you sure to delete your account?')) return;
+  await deleteDoc(doc(db,'users',currentUser.uid));
+  await deleteUser(currentUser);
 });
 </script>
 </body>
