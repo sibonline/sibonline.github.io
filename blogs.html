@@ -4,31 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SIB Blogs</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" href="styles.css">
-<header class="big-ribbon-header">
-  <div class="ribbon-top">
-    <img src="Logos/SIB Logo Wordmark.png" alt="SIB Logo">
-  </div>
-  <div class="ribbon-bottom">
-    <h1>Student Initiative Board</h1>
-    <p>An interschool academic organisation</p>
-    <nav>
-  <a href="index.html" class="hidden">Home</a>
-  <a href="about.html">| About |</a>
-  <a href="upcoming.html">| Upcoming Events |</a>
-  <a href="past_events.html">| Past Events |</a>
-  <a href="join.html">| Join SIB |</a>
-  <a href="SWC.html">| SWC |</a>
-  <a href="our_team.html">| Our Team |</a>
-  <a href="blogs.html">| Blogs |</a>
-  <a href="community.html">| Community |</a>
-</nav>
-  </div>
-</header>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 <style>
 body { font-family:'Poppins',sans-serif; background:#f5f5f5; margin:0; padding:20px;}
-h1 { text-align:center; margin-bottom:20px;}
-.blog-post { background:#fff; padding:20px; border-radius:12px; margin:20px auto; max-width:700px; box-shadow:0 6px 20px rgba(0,0,0,0.1); display:flex; flex-direction:row; align-items:flex-start; gap:15px; position:relative;}
+.blog-post { background:#fff; padding:20px; border-radius:12px; margin:20px auto; max-width:700px; box-shadow:0 6px 20px rgba(0,0,0,0.1); display:flex; flex-direction:row; align-items:flex-start; gap:15px; position:relative; transition:0.3s;}
+.blog-post:hover { transform: translateY(-3px);}
 .blog-post img { width:120px; height:120px; object-fit:cover; border-radius:12px; flex-shrink:0;}
 .blog-post .content { flex:1;}
 .blog-post h2 { margin-top:0;}
@@ -44,13 +25,37 @@ h1 { text-align:center; margin-bottom:20px;}
 </style>
 </head>
 <body>
-<h1>SIB Blogs</h1>
+
+<header class="big-ribbon-header">
+  <div class="ribbon-top">
+    <img src="Logos/SIB Logo Wordmark.png" alt="SIB Logo">
+  </div>
+  <div class="ribbon-bottom">
+    <h1>Student Initiative Board</h1>
+    <p>"By the Students, For the Students."</p>
+    <nav>
+      <a href="index.html" class="hidden">Home</a>
+      <a href="about.html">| About |</a>
+      <a href="upcoming.html">| Upcoming Events |</a>
+      <a href="past_events.html">| Past Events |</a>
+      <a href="join.html">| Join SIB |</a>
+      <a href="SWC.html">| SWC |</a>
+      <a href="our_team.html">| Our Team |</a>
+      <a href="blogs.html">| Blogs |</a>
+      <a href="community.html">| Community |</a>
+    </nav>
+  </div>
+</header>
+
+<h1 style="text-align:center;">SIB Blogs</h1>
+
 <div id="auth">
 <input type="email" id="email" placeholder="Admin Email">
 <input type="password" id="password" placeholder="Password">
 <button id="login">Login</button>
 <button id="logout" style="display:none;">Logout</button>
 </div>
+
 <div id="blog-form">
 <input type="text" id="title" placeholder="Title" required>
 <input type="text" id="author" placeholder="Author" required>
@@ -58,11 +63,13 @@ h1 { text-align:center; margin-bottom:20px;}
 <input type="text" id="image" placeholder="Image URL (optional)">
 <button id="add-blog">Add Blog</button>
 </div>
+
 <div id="blogs-container"></div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, onSnapshot, updateDoc, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, onSnapshot, updateDoc, doc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyBhYQ5C5KgsvpihD_6NneRzqVupdiHImB8",
@@ -78,7 +85,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const adminEmails = ['meetayaand@gmail.com','meetayaand@Gmail.com'];
+const adminEmails = ['meetayaand@gmail.com','ceo.sib.online@gmail.com','swc.sib.online@gmail.com'];
 
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
@@ -95,16 +102,86 @@ const blogsContainer = document.getElementById('blogs-container');
 let currentUser=null;
 let isAdmin=false;
 
-loginBtn.addEventListener('click',async()=>{try{const cred=await signInWithEmailAndPassword(auth,emailInput.value,passwordInput.value); if(!adminEmails.includes(cred.user.email)){alert('Not admin!'); await signOut(auth);}}catch(e){alert(e.message);}});
-logoutBtn.addEventListener('click',async()=>{await signOut(auth);});
+loginBtn.addEventListener('click', async () => {
+  try{
+    const cred = await signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
+    if(!adminEmails.includes(cred.user.email)){alert('Not admin!'); await signOut(auth);}
+  } catch(e){ alert(e.message);}
+});
 
-onAuthStateChanged(auth,user=>{currentUser=user; if(user && adminEmails.includes(user.email)){isAdmin=true; blogForm.style.display='block'; logoutBtn.style.display='inline-block'; loginBtn.style.display='none';}else{isAdmin=false; blogForm.style.display='none'; logoutBtn.style.display='none'; loginBtn.style.display='inline-block';}});
+logoutBtn.addEventListener('click', async()=>{await signOut(auth);});
 
-addBlogBtn.addEventListener('click',async()=>{if(!titleInput.value||!authorInput.value||!contentInput.value)return alert('Fill all required fields!'); await addDoc(collection(db,'blogs'),{title:titleInput.value,author:authorInput.value,content:contentInput.value,image:imageInput.value||'',timestamp:Date.now()}); titleInput.value=''; authorInput.value=''; contentInput.value=''; imageInput.value='';});
+onAuthStateChanged(auth, user=>{
+  currentUser = user;
+  if(user && adminEmails.includes(user.email)){
+    isAdmin = true;
+    blogForm.style.display='block';
+    logoutBtn.style.display='inline-block';
+    loginBtn.style.display='none';
+  } else {
+    isAdmin = false;
+    blogForm.style.display='none';
+    logoutBtn.style.display='none';
+    loginBtn.style.display='inline-block';
+  }
+});
 
-const blogsCol = collection(db,'blogs');
-onSnapshot(blogsCol,snapshot=>{blogsContainer.innerHTML=''; snapshot.forEach(docSnap=>{const data=docSnap.data(); const div=document.createElement('div'); div.classList.add('blog-post'); div.innerHTML=`<img src="${data.image||'Logos/SIB Logo HIGH RES.png'}" alt="${data.title}"><div class="content"><h2>${data.title}</h2><small>By ${data.author}</small><p>${data.content}</p></div>`; if(isAdmin){const btnDiv=document.createElement('div'); btnDiv.classList.add('admin-btn'); const editBtn=document.createElement('button'); editBtn.textContent='Edit'; editBtn.classList.add('edit'); const delBtn=document.createElement('button'); delBtn.textContent='Delete'; delBtn.classList.add('delete'); editBtn.addEventListener('click',()=>{const newTitle=prompt('Title:',data.title); const newAuthor=prompt('Author:',data.author); const newContent=prompt('Content:',data.content); const newImage=prompt('Image URL:',data.image||''); if(newTitle && newAuthor && newContent){updateDoc(doc(db,'blogs',docSnap.id),{title:newTitle,author:newAuthor,content:newContent,image:newImage||''});}}); delBtn.addEventListener('click',()=>{if(confirm('Delete this post?')) deleteDoc(doc(db,'blogs',docSnap.id));}); btnDiv.appendChild(editBtn); btnDiv.appendChild(delBtn); div.appendChild(btnDiv);} blogsContainer.appendChild(div);});});
+addBlogBtn.addEventListener('click', async () => {
+  if(!titleInput.value||!authorInput.value||!contentInput.value) return alert('Fill all fields!');
+  await addDoc(collection(db,'blogs'),{
+    title:titleInput.value,
+    author:authorInput.value,
+    content:contentInput.value,
+    image:imageInput.value||'',
+    timestamp:Date.now()
+  });
+  titleInput.value=''; authorInput.value=''; contentInput.value=''; imageInput.value='';
+});
+
+const blogsCol = query(collection(db,'blogs'), orderBy('timestamp','desc'));
+onSnapshot(blogsCol, snapshot=>{
+  blogsContainer.innerHTML='';
+  snapshot.forEach(docSnap=>{
+    const data=docSnap.data();
+    const div=document.createElement('div');
+    div.classList.add('blog-post');
+    div.innerHTML=`<img src="${data.image||'Logos/SIB Logo HIGH RES.png'}" alt="${data.title}">
+    <div class="content">
+    <h2>${data.title}</h2>
+    <small>By ${data.author}</small>
+    <p>${data.content}</p>
+    </div>`;
+    if(isAdmin){
+      const btnDiv=document.createElement('div');
+      btnDiv.classList.add('admin-btn');
+      const editBtn=document.createElement('button');
+      editBtn.textContent='Edit';
+      editBtn.classList.add('edit');
+      const delBtn=document.createElement('button');
+      delBtn.textContent='Delete';
+      delBtn.classList.add('delete');
+
+      editBtn.addEventListener('click', ()=>{
+        const newTitle = prompt('Title:', data.title);
+        const newAuthor = prompt('Author:', data.author);
+        const newContent = prompt('Content:', data.content);
+        const newImage = prompt('Image URL:', data.image||'');
+        if(newTitle && newAuthor && newContent){
+          updateDoc(doc(db,'blogs',docSnap.id), {title:newTitle, author:newAuthor, content:newContent, image:newImage||''});
+        }
+      });
+
+      delBtn.addEventListener('click', ()=>{
+        if(confirm('Delete this post?')) deleteDoc(doc(db,'blogs',docSnap.id));
+      });
+
+      btnDiv.appendChild(editBtn);
+      btnDiv.appendChild(delBtn);
+      div.appendChild(btnDiv);
+    }
+    blogsContainer.appendChild(div);
+  });
+});
 </script>
 </body>
 </html>
-

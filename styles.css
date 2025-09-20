@@ -274,3 +274,142 @@ footer .contact p {
   display: block;
   margin: 0.5rem 0;
 }
+
+.auth-form {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.auth-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #1e3a8a;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #3180d4;
+  font-size: 1rem;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: #256bbf;
+  box-shadow: 0 0 0 3px rgba(49,128,212,0.2);
+}
+
+.auth-form button {
+  width: 100%;
+  padding: 0.75rem;
+  background: #3180d4;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.auth-form button:hover {
+  background: #256bbf;
+}
+
+.auth-form .form-alt {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #1e3a8a;
+}
+
+.auth-form .form-alt a {
+  color: #3180d4;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.auth-form .form-alt a:hover {
+  text-decoration: underline;
+}
+
+#auth {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+#auth input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #3180d4;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#auth input:focus {
+  outline: none;
+  border-color: #256bbf;
+  box-shadow: 0 0 0 3px rgba(49,128,212,0.2);
+}
+
+#auth button {
+  width: 100%;
+  padding: 0.75rem;
+  background: #3180d4;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  margin-bottom: 0.5rem;
+}
+
+#auth button:hover {
+  background: #256bbf;
+  transform: translateY(-2px);
+}
+
+#auth #logout {
+  background: #FF4C4C;
+}
+
+#auth #logout:hover {
+  background: #D13B3B;
+}
+
+#auth h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #1e3a8a;
+}
+
+#auth p {
+  font-size: 0.9rem;
+  color: #1e3a8a;
+}
+
+#auth a {
+  color: #3180d4;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+#auth a:hover {
+  text-decoration: underline;
+}
