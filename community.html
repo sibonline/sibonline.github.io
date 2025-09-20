@@ -5,6 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SIB Community</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+#commentsContainer div {transition: all 0.3s ease;}
+.comment-btn {margin-left:5px; padding:0.2rem 0.5rem; border:none; border-radius:4px; cursor:pointer; font-size:0.8rem;}
+.comment-btn.edit{background:#3180d4; color:white;}
+.comment-btn.delete{background:#FF4C4C; color:white;}
+.comment-btn.reply{background:#22c55e; color:white;}
+.comment-btn:hover{opacity:0.8;}
+.reply-div{margin-left:20px; margin-top:10px; border-left:2px solid #3180d4; padding-left:10px;}
+#peopleList {display:none; margin-top:1rem; border:1px solid #ccc; border-radius:6px; padding:10px; max-height:300px; overflow-y:auto;}
+.user-entry {display:flex; justify-content:space-between; align-items:center; padding:5px 0; border-bottom:1px solid #eee;}
+.role-btn {margin-left:5px; padding:0.2rem 0.5rem; border:none; border-radius:4px; cursor:pointer; font-size:0.75rem;}
+.role-btn.admin{background:#3180d4; color:white;}
+.role-btn.ceo{background:#f59e0b; color:white;}
+.role-btn.remove{background:#FF4C4C; color:white;}
+.role-btn:hover{opacity:0.8;}
+</style>
+</head>
+<body>
+
 <header class="big-ribbon-header">
   <div class="ribbon-top">
     <img src="Logos/SIB Logo Wordmark.png" alt="SIB Logo">
@@ -13,192 +33,253 @@
     <h1>Student Initiative Board</h1>
     <p>An interschool academic organisation</p>
     <nav>
-  <a href="index.html" class="hidden">Home</a>
-  <a href="about.html">| About |</a>
-  <a href="upcoming.html">| Upcoming Events |</a>
-  <a href="past_events.html">| Past Events |</a>
-  <a href="join.html">| Join SIB |</a>
-  <a href="SWC.html">| SWC |</a>
-  <a href="our_team.html">| Our Team |</a>
-  <a href="blogs.html">| Blogs |</a>
-  <a href="community.html">| Community |</a>
-</nav>
+      <a href="index.html" class="hidden">Home</a>
+      <a href="about.html">| About |</a>
+      <a href="upcoming.html">| Upcoming Events |</a>
+      <a href="past_events.html">| Past Events |</a>
+      <a href="join.html">| Join SIB |</a>
+      <a href="SWC.html">| SWC |</a>
+      <a href="our_team.html">| Our Team |</a>
+      <a href="blogs.html">| Blogs |</a>
+      <a href="community.html">| Community |</a>
+    </nav>
   </div>
 </header>
-<style>
-body { font-family:'Poppins',sans-serif; background:#f5f5f5; margin:0; padding:20px;}
-h1 { text-align:center;}
-#auth,#comment-form,#people-list { max-width:700px; margin:10px auto; background:#fff; padding:20px; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.1);}
-#comments { max-width:700px; margin:20px auto;}
-.comment { background:#fff; padding:15px; margin-bottom:15px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); position:relative;}
-.comment small { color:#555; display:block; margin-bottom:5px;}
-.admin-label { color:red; font-weight:bold; margin-left:5px;}
-button { padding:8px 12px; border:none; border-radius:6px; background:#007BFF; color:#fff; cursor:pointer;}
-button:hover { background:#0056b3;}
-input,textarea,select { width:100%; padding:8px; margin-bottom:10px; border-radius:6px; border:1px solid #ccc;}
-#delete-account { background:#FF4C4C; margin-top:10px;}
-</style>
-</head>
-<body>
-<h1>SIB Community</h1>
-<div id="auth">
-<input type="text" id="username" placeholder="Username">
-<input type="email" id="email" placeholder="Email">
-<input type="password" id="password" placeholder="Password">
-<button id="login">Login</button>
-<button id="register">Register</button>
-<button id="logout" style="display:none;">Logout</button>
-<button id="delete-account">Delete My Account</button>
+
+<main>
+<section>
+<h2>Community Login</h2>
+<form class="auth-form">
+<label for="username">Username</label>
+<input type="text" id="username" placeholder="Enter username">
+<label for="email">Email</label>
+<input type="email" id="email" placeholder="Enter email">
+<label for="password">Password</label>
+<input type="password" id="password" placeholder="Enter password">
+<button type="button" id="registerBtn">Register</button><br><br>
+<button type="button" id="loginBtn">Login</button>
+<button type="button" id="logoutBtn" style="display:none;">Logout</button><br><br>
+<button type="button" id="deleteAccountBtn" style="display:none;background:#FF4C4C;">Delete My Account</button>
+</form>
+</section>
+
+<section id="admin-section" style="display:none;">
+<h2>People List (Admins only)</h2>
+<button id="togglePeopleList" style="margin-bottom:10px; padding:0.5rem 1rem; background:#3180d4; color:white; border:none; border-radius:6px; cursor:pointer;">Show/Hide Users</button>
+<div id="peopleList"></div>
+</section>
+
+<section id="comment-section" style="display:none;">
+<h2>Community Comments</h2>
+<textarea id="commentInput" placeholder="Type your comment..." rows="3" style="width:100%; padding:0.75rem; border-radius:6px; border:1px solid #3180d4;"></textarea>
+<button id="postCommentBtn" style="margin-top:10px; background:#3180d4; color:white; padding:0.5rem 1rem; border:none; border-radius:6px; cursor:pointer;">Post Comment</button>
+<div id="commentsContainer" style="margin-top:1rem;"></div>
+</section>
+</main>
+
+<footer>
+<p>© 2025 Student Initiative Board</p>
+<div class="socials">
+<a href="https://www.youtube.com">YouTube</a>
+<a href="https://www.instagram.com">Instagram</a>
 </div>
-<div id="comment-form" style="display:none;">
-<textarea id="comment" placeholder="Write your comment..."></textarea>
-<button id="post-comment">Post Comment</button>
+<div class="contact">
+<p>Email: ceo.sib.online@gmail.com</p>
 </div>
-<div id="people-list" style="display:none;">
-<h3>All Users</h3>
-<div id="users-container"></div>
-</div>
-<div id="comments"></div>
+</footer>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
-import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword, onAuthStateChanged, signOut, deleteUser } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, serverTimestamp, onSnapshot, query, orderBy, doc, getDoc, setDoc, updateDoc, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, deleteUser, updateProfile } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, doc, updateDoc, deleteDoc, setDoc, getDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-const firebaseConfig = {
-apiKey: "AIzaSyBhYQ5C5KgsvpihD_6NneRzqVupdiHImB8",
-authDomain: "sibonlinehubcommunity.firebaseapp.com",
-projectId: "sibonlinehubcommunity",
-storageBucket: "sibonlinehubcommunity.firebasestorage.app",
-messagingSenderId: "715051010435",
-appId: "1:715051010435:web:c51d3994c0b2c0602e4eb6",
-measurementId: "G-P1M7EF6PF6"
-};
+const firebaseConfig = {apiKey:"AIzaSyBhYQ5C5KgsvpihD_6NneRzqVupdiHImB8",authDomain:"sibonlinehubcommunity.firebaseapp.com",projectId:"sibonlinehubcommunity",storageBucket:"sibonlinehubcommunity.firebasestorage.app",messagingSenderId:"715051010435",appId:"1:715051010435:web:c51d3994c0b2c0602e4eb6",measurementId:"G-P1M7EF6PF6"};
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const usernameInput=document.getElementById('username');
-const emailInput=document.getElementById('email');
-const passwordInput=document.getElementById('password');
-const loginBtn=document.getElementById('login');
-const registerBtn=document.getElementById('register');
-const logoutBtn=document.getElementById('logout');
-const deleteBtn=document.getElementById('delete-account');
-const commentForm=document.getElementById('comment-form');
-const commentInput=document.getElementById('comment');
-const postBtn=document.getElementById('post-comment');
-const commentsDiv=document.getElementById('comments');
-const peopleList=document.getElementById('people-list');
-const usersContainer=document.getElementById('users-container');
+const usernameInput = document.getElementById('username');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const loginBtn = document.getElementById('loginBtn');
+const registerBtn = document.getElementById('registerBtn');
+const logoutBtn = document.getElementById('logoutBtn');
+const deleteAccountBtn = document.getElementById('deleteAccountBtn');
+
+const adminSection = document.getElementById('admin-section');
+const togglePeopleList = document.getElementById('togglePeopleList');
+const peopleListDiv = document.getElementById('peopleList');
+
+const commentSection = document.getElementById('comment-section');
+const commentInput = document.getElementById('commentInput');
+const postCommentBtn = document.getElementById('postCommentBtn');
+const commentsContainer = document.getElementById('commentsContainer');
 
 let currentUser=null;
-let isAdmin=false;
-const adminEmails=['meetayaand@gmail.com','meetayaand@Gmail.com'];
+const adminEmails=['meetayaand@gmail.com','ceo.sib.online@gmail.com','swc.sib.online@gmail.com'];
 
-async function checkAdmin(user){ isAdmin=adminEmails.includes(user.email); }
-
-async function loadUsers(){
-usersContainer.innerHTML='';
-const usersSnap=await getDocs(collection(db,'users'));
-usersSnap.forEach(docSnap=>{
-const data=docSnap.data();
-const div=document.createElement('div');
-div.style.border="1px solid #ccc"; div.style.padding="8px"; div.style.margin="5px 0"; div.style.borderRadius="6px";
-const adminTag=adminEmails.includes(data.email)?'<span class="admin-label">Admin</span>':'';
-div.innerHTML=`<strong>${data.displayName||'(no username)'}</strong>${adminTag} | ${data.role||'Member'}`;
-if(isAdmin){
-const nameInputEl=document.createElement('input'); nameInputEl.placeholder='Username'; nameInputEl.value=data.displayName||'';
-const roleSelect=document.createElement('select');
-['Member','Tech Team','CEO','CTO','Executive Board','Marketing','Media Team'].forEach(r=>{
-const opt=document.createElement('option'); opt.value=r; opt.text=r; if(r===data.role) opt.selected=true; roleSelect.appendChild(opt);
-});
-const saveBtn=document.createElement('button'); saveBtn.textContent='Save';
-saveBtn.addEventListener('click',async()=>{
-const password=prompt('Admin password:'); if(password!=='sib@2000') return alert('Wrong password');
-await updateDoc(doc(db,'users',docSnap.id),{displayName:nameInputEl.value,role:roleSelect.value});
-loadUsers();
-});
-div.appendChild(document.createElement('br'));
-div.appendChild(nameInputEl); div.appendChild(roleSelect); div.appendChild(saveBtn);
-}
-usersContainer.appendChild(div);
-});
+async function saveUserToFirestore(user, username){
+  await setDoc(doc(db,'users',user.uid),{
+    displayName: username,
+    email: user.email,
+    role: adminEmails.includes(user.email)?'Admin':''
+  });
 }
 
-registerBtn.addEventListener('click',async()=>{
-try{
-const cred=await createUserWithEmailAndPassword(auth,emailInput.value,passwordInput.value);
-await setDoc(doc(db,'users',cred.user.uid),{email:cred.user.email,displayName:usernameInput.value,role:'Member'});
-await sendEmailVerification(cred.user);
-alert('Registered! Check your email to verify your account.');
-}catch(e){alert(e.message);}
+registerBtn.addEventListener('click', async () => {
+  try {
+    if(!usernameInput.value.trim() || !emailInput.value.trim() || !passwordInput.value.trim()) return alert('Fill all fields');
+    const cred = await createUserWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
+    await updateProfile(cred.user, { displayName: usernameInput.value });
+    await setDoc(doc(db, 'users', cred.user.uid), {
+      displayName: usernameInput.value,
+      email: emailInput.value,
+      role: adminEmails.includes(emailInput.value) ? 'Admin' : ''
+    });
+    alert('Registered! You can now login.');
+  } catch(e) { alert(e.message); }
 });
 
-loginBtn.addEventListener('click',async()=>{
-try{
-await signInWithEmailAndPassword(auth,emailInput.value,passwordInput.value);
-}catch(e){alert(e.message);}
+loginBtn.addEventListener('click', async () => {
+  try {
+    await signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value);
+  } catch(e) { alert(e.message); }
 });
 
-logoutBtn.addEventListener('click',async()=>{await signOut(auth);});
+onAuthStateChanged(auth, async (user) => {
+  currentUser = user;
+  if(user){
+    logoutBtn.style.display = 'inline-block';
+    deleteAccountBtn.style.display = 'inline-block';
+    loginBtn.style.display = 'none';
+    registerBtn.style.display = 'none';
+    commentSection.style.display = 'block';
+    const userDoc = await getDoc(doc(db, 'users', user.uid));
+    if(userDoc.exists()){
+      usernameInput.value = userDoc.data().displayName;
+      if(adminEmails.includes(user.email)) adminSection.style.display = 'block';
+    }
+  } else {
+    logoutBtn.style.display = 'none';
+    deleteAccountBtn.style.display = 'none';
+    loginBtn.style.display = 'inline-block';
+    registerBtn.style.display = 'inline-block';
+    commentSection.style.display = 'none';
+    adminSection.style.display = 'none';
+  }
+});
+
+postCommentBtn.addEventListener('click', async()=>{
+  if(!currentUser) return alert('Login first!');
+  const msg = commentInput.value.trim();
+  if(!msg) return;
+  await addDoc(collection(db,'comments'),{
+    userId: currentUser.uid,
+    username: currentUser.displayName||'Anonymous',
+    message: msg,
+    timestamp: new Date(),
+    replies:[]
+  });
+  commentInput.value='';
+});
+
+function renderComments(docs){
+  commentsContainer.innerHTML='';
+  docs.forEach(docSnap=>{
+    const data = docSnap.data();
+    const div = document.createElement('div');
+    div.style.border='1px solid #ccc';
+    div.style.padding='10px';
+    div.style.marginBottom='10px';
+    div.style.borderRadius='6px';
+    div.style.position='relative';
+
+    div.innerHTML=`<strong>${data.username}</strong> <small>${new Date(data.timestamp.seconds*1000).toLocaleString()}</small>
+    <p>${data.message}</p>
+    <div id="replies-${docSnap.id}" class="reply-div"></div>`;
+
+    if(currentUser && (currentUser.uid===data.userId || adminEmails.includes(currentUser.email))){
+      const editBtn=document.createElement('button');
+      editBtn.textContent='Edit'; editBtn.className='comment-btn edit';
+      editBtn.addEventListener('click', async()=>{ const newMsg = prompt('Edit your comment:', data.message); if(newMsg) await updateDoc(doc(db,'comments',docSnap.id),{message:newMsg});});
+      const deleteBtn=document.createElement('button');
+      deleteBtn.textContent='Delete'; deleteBtn.className='comment-btn delete';
+      deleteBtn.addEventListener('click', async()=>{if(confirm('Delete this comment?')){ div.style.opacity='0'; div.style.transform='scale(0.95)'; setTimeout(async()=>{ await deleteDoc(doc(db,'comments',docSnap.id)); },300);}});
+      div.appendChild(editBtn); div.appendChild(deleteBtn);
+    }
+
+    const replyBtn=document.createElement('button');
+    replyBtn.textContent='Reply'; replyBtn.className='comment-btn reply';
+    replyBtn.addEventListener('click', async()=>{
+      const replyText = prompt('Type your reply:');
+      if(replyText){
+        const newReply={userId:currentUser.uid,username:currentUser.displayName||'Anonymous',message:replyText,timestamp:new Date()};
+        const updatedReplies = data.replies||[];
+        updatedReplies.push(newReply);
+        await updateDoc(doc(db,'comments',docSnap.id),{replies:updatedReplies});
+      }
+    });
+    div.appendChild(replyBtn);
+
+    (data.replies||[]).forEach(r=>{
+      const rDiv=document.createElement('div');
+      rDiv.className='reply-div';
+      rDiv.innerHTML=`<strong>${r.username}</strong> <small>${new Date(r.timestamp.seconds*1000).toLocaleString()}</small><p>${r.message}</p>`;
+      div.querySelector(`#replies-${docSnap.id}`).appendChild(rDiv);
+    });
+
+    commentsContainer.appendChild(div);
+  });
+}
+
+async function renderPeopleList(){
+  const usersSnapshot = await getDocs(collection(db,'users'));
+  peopleListDiv.innerHTML='';
+  usersSnapshot.forEach(u=>{
+    const data = u.data();
+    const div = document.createElement('div');
+    div.className='user-entry';
+    div.innerHTML=`<span>${data.displayName} (${data.email}) - Role: ${data.role || 'None'}</span>`;
+    if(adminEmails.includes(currentUser.email)){
+      const adminBtn=document.createElement('button'); adminBtn.textContent='Admin'; adminBtn.className='role-btn admin';
+      adminBtn.addEventListener('click', async()=>{ await updateDoc(doc(db,'users',u.id),{role:'Admin'}); renderPeopleList();});
+      const ceoBtn=document.createElement('button'); ceoBtn.textContent='CEO'; ceoBtn.className='role-btn ceo';
+      ceoBtn.addEventListener('click', async()=>{ await updateDoc(doc(db,'users',u.id),{role:'CEO'}); renderPeopleList();});
+      const removeBtn=document.createElement('button'); removeBtn.textContent='Remove Role'; removeBtn.className='role-btn remove';
+      removeBtn.addEventListener('click', async()=>{ await updateDoc(doc(db,'users',u.id),{role:''}); renderPeopleList();});
+      div.appendChild(adminBtn); div.appendChild(ceoBtn); div.appendChild(removeBtn);
+    }
+    peopleListDiv.appendChild(div);
+  });
+}
+
+togglePeopleList.addEventListener('click',()=>{peopleListDiv.style.display = peopleListDiv.style.display==='none'?'block':'none';});
 
 onAuthStateChanged(auth,async(user)=>{
-currentUser=user;
-if(user && user.emailVerified){
-commentForm.style.display='block'; logoutBtn.style.display='inline-block'; loginBtn.style.display='none'; registerBtn.style.display='none';
-await checkAdmin(user);
-if(isAdmin) peopleList.style.display='block'; else peopleList.style.display='none';
-if(isAdmin) loadUsers();
-}else{
-commentForm.style.display='none'; logoutBtn.style.display='none'; loginBtn.style.display='inline-block'; registerBtn.style.display='inline-block';
-peopleList.style.display='none';
-}
-});
+  currentUser=user;
+  if(user){
+    logoutBtn.style.display='inline-block';
+    deleteAccountBtn.style.display='inline-block';
+    loginBtn.style.display='none';
+    registerBtn.style.display='none';
+    commentSection.style.display='block';
+    if(adminEmails.includes(user.email)){adminSection.style.display='block'; await renderPeopleList();}
+    const docSnap = await getDoc(doc(db,'users',user.uid));
+    if(docSnap.exists()) usernameInput.value = docSnap.data().displayName;
+  } else {
+    logoutBtn.style.display='none';
+    deleteAccountBtn.style.display='none';
+    loginBtn.style.display='inline-block';
+    registerBtn.style.display='inline-block';
+    commentSection.style.display='none';
+    adminSection.style.display='none';
+  }
 
-postBtn.addEventListener('click',async()=>{
-if(!currentUser) return alert('Login first');
-const msg=commentInput.value.trim(); if(msg==='') return;
-const userRef=doc(db,'users',currentUser.uid);
-const userSnap=await getDoc(userRef);
-let displayName=userSnap.exists()?userSnap.data().displayName:usernameInput.value||'Anonymous';
-let role=adminEmails.includes(currentUser.email)?'Admin':(userSnap.exists()?userSnap.data().role:'Member');
-await addDoc(collection(db,'comments'),{
-user:displayName,
-role:role,
-message:msg,
-timestamp:serverTimestamp()
-});
-commentInput.value='';
-});
-
-const commentsQuery=query(collection(db,'comments'),orderBy('timestamp','asc'));
-onSnapshot(commentsQuery,snapshot=>{
-commentsDiv.innerHTML='';
-snapshot.forEach(docSnap=>{
-const data=docSnap.data();
-const div=document.createElement('div');
-div.classList.add('comment');
-const adminTag=data.role==='Admin'?'<span class="admin-label">Admin</span>':'';
-div.innerHTML=`<small>${data.user}${adminTag} (${data.role}) | ${data.timestamp?.toDate().toLocaleString()||''}</small><p>${data.message}</p>`;
-if(isAdmin){
-const delBtn=document.createElement('button');
-delBtn.textContent='Delete Comment';
-delBtn.addEventListener('click',async()=>{await deleteDoc(doc(db,'comments',docSnap.id));});
-div.appendChild(delBtn);
-}
-commentsDiv.appendChild(div);
-});
-});
-
-deleteBtn.addEventListener('click',async()=>{
-if(!currentUser) return alert('Login first');
-if(!confirm('Are you sure to delete your account?')) return;
-await deleteDoc(doc(db,'users',currentUser.uid));
-await deleteUser(currentUser);
+  const q=query(collection(db,'comments'),orderBy('timestamp','asc'));
+  onSnapshot(q,snapshot=>renderComments(snapshot.docs));
 });
 </script>
+
 </body>
 </html>
