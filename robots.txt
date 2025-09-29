@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://sibonline.github.io/sitemap.xml
