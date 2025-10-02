@@ -413,3 +413,30 @@ footer .contact p {
 #auth a:hover {
   text-decoration: underline;
 }
+.recruitment-banner {
+  background: #fef3c7;
+  border: 2px solid #fbbf24;
+  padding: 15px;
+  margin: 20px 0;
+  text-align: center;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.recruitment-banner h3 {
+  margin: 0;
+  font-weight: 600;
+  color: #92400e;
+}
+
+.recruitment-banner p {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: #78350f;
+}
+
+.recruitment-banner a {
+  color: #b45309;
+  font-weight: 600;
+  text-decoration: underline;
+  }
