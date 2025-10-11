@@ -15,6 +15,120 @@
 <link rel="icon" type="image/png" href="Logos/SIB Logo HIGH RES.png">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #222;
+  }
+
+  header {
+    text-align: center;
+    background: #fff;
+    padding: 20px 0;
+    border-bottom: 2px solid #eee;
+  }
+
+  header img {
+    width: 180px;
+    margin-bottom: 10px;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: #333;
+    margin: 0 5px;
+  }
+
+  .recruitment-banner {
+    background: linear-gradient(90deg, #0072ff, #00c6ff);
+    color: white;
+    padding: 15px 20px;
+    margin: 30px auto 10px auto;
+    border-radius: 12px;
+    text-align: center;
+    width: 90%;
+    max-width: 900px;
+  }
+
+  .recruitment-banner h3 {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .birthday-ribbon {
+    background: linear-gradient(90deg, #ff0080, #ff8c00);
+    color: white;
+    padding: 18px 20px;
+    margin: 10px auto 30px auto;
+    border-radius: 12px;
+    text-align: center;
+    width: 90%;
+    max-width: 900px;
+    font-size: 1.2em;
+    font-weight: 600;
+    box-shadow: 0 4px 8px rgba(255, 100, 100, 0.3);
+    position: relative;
+  }
+
+  .birthday-ribbon::before,
+  .birthday-ribbon::after {
+    content: "🎉";
+    font-size: 1.5em;
+    position: absolute;
+    top: 10px;
+  }
+
+  .birthday-ribbon::before { left: 15px; }
+  .birthday-ribbon::after { right: 15px; }
+
+  .team-section {
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .team-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .team-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    width: 280px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  .team-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  footer {
+    text-align: center;
+    background: #fff;
+    padding: 15px;
+    border-top: 2px solid #eee;
+    margin-top: 40px;
+  }
+
+  .socials a {
+    margin: 0 10px;
+    color: #0072ff;
+    text-decoration: none;
+  }
+
+  .socials a:hover {
+    text-decoration: underline;
+  }
+</style>
 </head>
 
 <body>
@@ -45,10 +159,15 @@
 <section class="team-section">
   <h2>Our Team</h2>
 
-  <!-- Banner for CLO recruitment -->
+  <!-- CLO recruitment banner -->
   <div class="recruitment-banner">
     <h3>🚀 We are looking for a Chief Logistics Officer (CLO)!</h3>
-    <p>If you are passionate about organising events, managing logistics, and driving student-led initiatives, we’d love to hear from you. <a href="join.html">Apply Now</a></p>
+    <p>If you are passionate about organising events, managing logistics, and driving student-led initiatives, we’d love to hear from you. <a href="join.html" style="color:white; text-decoration:underline;">Apply Now</a></p>
+  </div>
+
+  <!-- 🎀 Birthday Ribbon under CLO announcement -->
+  <div class="birthday-ribbon">
+    🎂 Happy Birthday <strong>Harleen!</strong> 🎈 Wishing you an amazing day filled with joy, laughter, and success! (11 Oct 2025)
   </div>
 
   <div class="team-cards">
@@ -65,12 +184,6 @@
       <h3>Ayaan Dhalait</h3>
       <span class="role">Head of the SWC and CTO</span>
       <p class="quote">“CTO of SIB, dev, and coding club lead. Honestly, I just mess around on my laptop, throw together some spaghetti code, and somehow it works. In the end I always have tools, projects, and random bug fixes that make more bugs but somehow that actually help students get motivation and keep doing this stuff and keeps our website, apps, etc running."</p>
-    </div>
-
-    <div class="team-card harleen">
-      <h3>Harleen</h3>
-      <span class="role">Birthday Girl Today (11 oct 2025)</span>
-      <p class="quote">Happy Birthday Harleen</p>
     </div>
 
     <div class="team-card shaurya">
@@ -114,5 +227,3 @@
 
 </body>
 </html>
-
-
