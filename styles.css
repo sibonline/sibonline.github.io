@@ -12,7 +12,13 @@ body {
   opacity: 1;
   transition: opacity 0.5s ease;
 }
-
+@media (max-width: 600px) {
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
 .big-ribbon-header {
   width: 100%;
   border-radius: 8px;
@@ -440,3 +446,4 @@ footer .contact p {
   font-weight: 600;
   text-decoration: underline;
   }
+
