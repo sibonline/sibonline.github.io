@@ -15,6 +15,107 @@
   <link rel="icon" type="image/png" href="Logos/SIB Logo HIGH RES.png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background: #fff;
+      color: #333;
+    }
+    header.big-ribbon-header {
+      background: #3180d4;
+      color: white;
+      padding-bottom: 1rem;
+    }
+    .ribbon-top img {
+      height: 60px;
+      display: block;
+      margin: 1rem auto 0 auto;
+    }
+    .ribbon-bottom h1, .ribbon-bottom p {
+      text-align: center;
+      margin: 0.5rem 0;
+    }
+    nav {
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 0.5rem;
+      font-weight: 500;
+    }
+    main {
+      padding: 2rem 1rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .intro {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .clubs-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .club {
+      background: #f0f5ff;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      max-width: 300px;
+      flex: 1 1 250px;
+    }
+    .club img {
+      height: 80px;
+      margin-bottom: 0.5rem;
+    }
+    .join {
+      text-align: center;
+      margin-top: 3rem;
+    }
+    .join a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: #3180d4;
+      color: white;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    footer {
+      background: #f0f5ff;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      margin-top: 2rem;
+    }
+    footer .socials a {
+      margin: 0 0.5rem;
+      color: #3180d4;
+      text-decoration: none;
+    }
+    hr.styled-hr {
+      margin: 2.5rem auto;
+      border: 1px solid #3180d4;
+      width: 60%;
+    }
+    .learn-more-btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: #3180d4;
+      color: white;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+  </style>
 </head>
 <body>
 <header class="big-ribbon-header">
@@ -46,44 +147,38 @@
 
 <section class="clubs">
   <h2>Our Clubs & Agencies</h2>
-  <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1.5rem; margin-bottom:2rem;">
-    <div class="club" style="background:#f0f5ff;padding:1rem;border-radius:8px;text-align:center; max-width:300px;">
-      <img src="Logos/SWC.png" alt="SWC Logo" style="height:80px;">
+  <div class="clubs-container">
+    <div class="club">
+      <img src="Logos/SWC.png" alt="SWC Logo">
       <h3>Students Who Code (SWC)</h3>
       <p>A coding club for students passionate about technology. SWC organizes hackathons, robotics competitions, game jams, and workshops.</p>
     </div>
-
-    <div class="club" style="background:#f0f5ff;padding:1rem;border-radius:8px;text-align:center; max-width:300px;">
-      <img src="Logos/SIB MUN Logo.jpeg" alt="SIB MUN Logo" style="height:80px;">
+    <div class="club">
+      <img src="Logos/SIB MUN Logo.jpeg" alt="SIB MUN Logo">
       <h3>SIB MUN</h3>
       <p>Our flagship Model United Nations program empowers students to develop public speaking, diplomacy, negotiation, and leadership skills.</p>
     </div>
-
-    <div class="club" style="background:#f0f5ff;padding:1rem;border-radius:8px;text-align:center; max-width:300px;">
-      <img src="Logos/SIB Science Logo (Waste Management).jpeg" alt="SIB Science Logo" style="height:80px;">
+    <div class="club">
+      <img src="Logos/SIB Science Logo (Waste Management).jpeg" alt="SIB Science Logo">
       <h3>SIB Science</h3>
       <p>Encouraging scientific exploration and innovation, SIB Science engages students in experiments, research projects, science fairs, and sustainability initiatives.</p>
     </div>
-
-    <div class="club" style="background:#f0f5ff;padding:1rem;border-radius:8px;text-align:center; max-width:300px;">
-      <img src="Logos/SIB Logo HIGH RES.png" alt="SIB Logo" style="height:80px;">
+    <div class="club">
+      <img src="Logos/SIB Logo HIGH RES.png" alt="SIB Logo">
       <h3>SIB Community</h3>
       <p>A platform connecting students, fostering collaboration, events, workshops, and community-driven projects.</p>
     </div>
   </div>
-
-  <hr style="margin:2.5rem auto; border:1px solid #3180d4; width:60%;">
+  <hr class="styled-hr">
   <div style="text-align:center; margin-bottom:3rem;">
-    <a href="agencies.html" style="display:inline-block; padding:0.75rem 1.5rem; background:#3180d4; color:white; border-radius:4px; text-decoration:none; font-weight:500;">Learn More</a>
+    <a href="agencies.html" class="learn-more-btn">Learn More</a>
   </div>
 </section>
 
-
-
 <section class="join">
   <h2>Join the SIB</h2>
-  <center><p>Applications are always open for students eager to contribute. Fill out our application form or write to us to become part of the SIB.</p></center>
-  <center><a href="join.html">Apply Now</a></center>
+  <p>Applications are always open for students eager to contribute. Fill out our application form or write to us to become part of the SIB.</p>
+  <a href="join.html">Apply Now</a>
 </section>
 </main>
 
@@ -99,12 +194,3 @@
 <script src="page-script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
