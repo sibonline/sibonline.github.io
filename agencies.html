@@ -9,145 +9,122 @@
   <link rel="stylesheet" href="styles.css">
   <style>
     .agency-section {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 3rem auto;
-      text-align: center;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:2rem;
+      max-width:1200px;
+      margin:3rem auto;
+      text-align:center;
     }
-
     .agency-card {
-      background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-      padding: 2rem 1rem;
+      background:#ffffff;
+      border-radius:12px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.08);
+      padding:2rem 1rem;
+      max-width:300px;
       transition: transform 0.3s, box-shadow 0.3s;
     }
-
     .agency-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+      transform:translateY(-5px);
+      box-shadow:0 10px 24px rgba(0,0,0,0.15);
     }
-
     .agency-card h3 {
-      color: #1e3a8a;
-      margin-bottom: 0.6rem;
+      color:#1e3a8a;
+      margin-bottom:0.6rem;
     }
-
     .agency-card p {
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
-      color: #1e3a8a;
+      font-size:0.95rem;
+      margin-bottom:1.5rem;
+      color:#1e3a8a;
     }
-
-    .agency-card a {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      background: #3180d4;
-      color: white;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: background 0.3s;
-    }
-
-    .agency-card a:hover {
-      background: #256bbf;
-    }
-
     .join-section {
-      background: #f0f5ff;
-      text-align: center;
-      padding: 3rem 1rem;
-      margin-top: 3rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      background:#f0f5ff;
+      text-align:center;
+      padding:3rem 1rem;
+      margin-top:3rem;
+      border-radius:8px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.05);
     }
-
     .join-section h2 {
-      color: #1e3a8a;
-      font-size: 2rem;
-      margin-bottom: 1rem;
+      color:#1e3a8a;
+      font-size:2rem;
+      margin-bottom:1rem;
     }
-
     .join-section p {
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
+      font-size:1rem;
+      margin-bottom:1.5rem;
     }
-
     .join-section a {
-      padding: 0.75rem 1.5rem;
-      background: #3180d4;
-      color: white;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 500;
+      padding:0.75rem 1.5rem;
+      background:#3180d4;
+      color:white;
+      border-radius:4px;
+      text-decoration:none;
+      font-weight:500;
       transition: background 0.3s;
     }
-
     .join-section a:hover {
-      background: #256bbf;
+      background:#256bbf;
     }
   </style>
 </head>
 <body>
 
-  <header class="big-ribbon-header">
-    <div class="ribbon-top">
-      <img src="Logos/SIB Logo Wordmark.png" alt="SIB Logo">
+<header class="big-ribbon-header">
+  <div class="ribbon-top">
+    <img src="Logos/SIB Logo Wordmark.png" alt="SIB Logo">
+  </div>
+  <div class="ribbon-bottom">
+    <h1>The Student Initiative Board</h1>
+    <p>"By The Students, For The Students."</p>
+    <nav>
+      <a href="index.html">|Home|</a>
+      <a href="about.html">|About|</a>
+      <a href="upcoming.html">|Upcoming Events|</a>
+      <a href="past_events.html">|Past Events|</a>
+      <a href="join.html">|Join SIB|</a>
+      <a href="our_team.html">|Our Team|</a>
+      <a href="blogs.html">|Blogs|</a>
+      <a href="community.html">|Community|</a>
+      <a href="support.html">|Support|</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="agency-section">
+    <div class="agency-card">
+      <h3>Students Who Code (SWC)</h3>
+      <p>A coding club for students passionate about technology. SWC organizes hackathons, robotics competitions, game jams, and workshops.</p>
     </div>
-    <div class="ribbon-bottom">
-      <h1>The Student Initiative Board</h1>
-      <p>"By The Students, For The Students."</p>
-      <nav>
-        <a href="index.html">|Home|</a>
-        <a href="about.html">|About|</a>
-        <a href="upcoming.html">|Upcoming Events|</a>
-        <a href="past_events.html">|Past Events|</a>
-        <a href="join.html">|Join SIB|</a>
-        <a href="SWC.html">|SWC|</a>
-        <a href="our_team.html">|Our Team|</a>
-        <a href="blogs.html">|Blogs|</a>
-        <a href="community.html">|Community|</a>
-        <a href="support.html">|Support|</a>
-      </nav>
+
+    <div class="agency-card">
+      <h3>SIB MUN</h3>
+      <p>Our flagship Model United Nations program empowers students to develop public speaking, diplomacy, negotiation, and leadership skills.</p>
     </div>
-  </header>
 
-  <main>
-    <section class="agency-section">
-  <div class="agency-card">
-    <h3>Students Who Code (SWC)</h3>
-    <p>A coding club for students passionate about technology. SWC organizes hackathons, robotics competitions, game jams, and workshops.</p>
-  </div>
+    <div class="agency-card">
+      <h3>SIB Science</h3>
+      <p>Encouraging scientific exploration and innovation, SIB Science engages students in experiments, research projects, science fairs, and sustainability initiatives.</p>
+    </div>
 
-  <div class="agency-card">
-    <h3>SIB MUN</h3>
-    <p>Our flagship Model United Nations program empowers students to develop public speaking, diplomacy, negotiation, and leadership skills.</p>
-  </div>
+    <div class="agency-card">
+      <h3>SIB Community</h3>
+      <p>A platform connecting students, fostering collaboration, events, workshops, and community-driven projects.</p>
+    </div>
+  </section>
 
-  <div class="agency-card">
-    <h3>SIB Science</h3>
-    <p>Encouraging scientific exploration and innovation, SIB Science engages students in experiments, research projects, science fairs, and sustainability initiatives.</p>
-  </div>
+  <section class="join-section">
+    <h2>Become a Part of SIB</h2>
+    <p>Applications are open for all students eager to contribute to our initiatives, clubs, and community projects.</p>
+    <a href="join.html">Join Us</a>
+  </section>
+</main>
 
-  <div class="agency-card" style="margin:0 auto;">
-    <h3>SIB Wiki</h3>
-    <p>A free Wikipedia documenting SIB projects, initiatives, and events.</p>
-  </div>
-</section>
+<footer>
+  © 2025 Student Initiative Board | All Rights Reserved
+</footer>
 
-
-    <section class="join-section">
-      <h2>Become a Part of SIB</h2>
-      <p>Applications are open for all students eager to contribute to our initiatives, clubs, and community projects.</p>
-      <a href="https://sibonline.github.io/join.html">Join Us</a>
-    </section>
-  </main>
-
-  <footer>
-    © 2025 Student Initiative Board | All Rights Reserved
-  </footer>
 </body>
 </html>
