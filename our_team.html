@@ -4,17 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Team | Student Initiative Board</title>
-<meta name="description" content="PAGE_DESCRIPTION">
-<meta name="keywords" content="Student Initiative Board, SIB, student clubs, MUN, coding club, science club, SWC, student community, school events">
-<meta name="author" content="Student Initiative Board">
-<meta property="og:title" content="PAGE_TITLE | Student Initiative Board">
-<meta property="og:description" content="PAGE_DESCRIPTION">
-<meta property="og:type" content="website">
-<meta property="og:url" content="PAGE_URL">
-<meta property="og:image" content="https://sibonline.github.io/Logos/SIB%20Logo%20HIGH%20RES.png">
-<link rel="icon" type="image/png" href="Logos/SIB Logo HIGH RES.png">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
 <style>
   body {
     font-family: 'Poppins', sans-serif;
@@ -23,79 +13,32 @@
     background-color: #f9f9f9;
     color: #222;
   }
-
   header {
     text-align: center;
     background: #fff;
-    padding: 20px 0;
+    padding: 10px 0;
     border-bottom: 2px solid #eee;
   }
-
   header img {
-    width: 180px;
-    margin-bottom: 10px;
+    width: 55px;
+    height: auto;
+    margin-bottom: 6px;
   }
-
   nav a {
     text-decoration: none;
     color: #333;
     margin: 0 5px;
   }
-
-  .recruitment-banner {
-    background: linear-gradient(90deg, #FF9103, #FDC805);
-    color: white;
-    padding: 15px 20px;
-    margin: 30px auto 10px auto;
-    border-radius: 12px;
-    text-align: center;
-    width: 90%;
-    max-width: 900px;
-  }
-
-  .recruitment-banner h3 {
-    margin: 0;
-    font-weight: 600;
-  }
-
-  .birthday-ribbon {
-    background: linear-gradient(90deg, #ff0080, #ff8c00);
-    color: white;
-    padding: 18px 20px;
-    margin: 10px auto 30px auto;
-    border-radius: 12px;
-    text-align: center;
-    width: 90%;
-    max-width: 900px;
-    font-size: 1.2em;
-    font-weight: 600;
-    box-shadow: 0 4px 8px rgba(255, 100, 100, 0.3);
-    position: relative;
-  }
-
-  .birthday-ribbon::before,
-  .birthday-ribbon::after {
-    content: "🎉";
-    font-size: 1.5em;
-    position: absolute;
-    top: 10px;
-  }
-
-  .birthday-ribbon::before { left: 15px; }
-  .birthday-ribbon::after { right: 15px; }
-
   .team-section {
     text-align: center;
     padding: 40px 20px;
   }
-
   .team-cards {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
   }
-
   .team-card {
     background: #fff;
     border-radius: 12px;
@@ -103,14 +46,23 @@
     width: 280px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   }
-
   .team-card img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
   }
-
+  .linkedin-link {
+    display: inline-block;
+    width: 10%;
+    height: 10%;
+    margin-top: 4px;
+  }
+  .linkedin-link img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
   footer {
     text-align: center;
     background: #fff;
@@ -118,51 +70,18 @@
     border-top: 2px solid #eee;
     margin-top: 40px;
   }
-
-  .socials a {
-    margin: 0 10px;
-    color: #0072ff;
-    text-decoration: none;
-  }
-
-  .socials a:hover {
-    text-decoration: underline;
-  }
 </style>
 </head>
-
 <body>
-
-<header class="big-ribbon-header">
-  <div class="ribbon-top">
-    <img src="Logos/SIB Logo Wordmark.png" alt="SIB Logo">
-  </div>
-  <div class="ribbon-bottom">
-    <h1>The Student Initiative Board</h1>
-    <p>"By The Students, For The Students."</p>
-    <nav>
-      <a href="index.html">|Home|</a>
-      <a href="about.html">|About|</a>
-      <a href="upcoming.html">|Upcoming Events|</a>
-      <a href="past_events.html">|Past Events|</a>
-      <a href="join.html">|Join SIB|</a>
-      <a href="our_team.html">|Our Team|</a>
-      <a href="blogs.html">|Blogs|</a>
-      <a href="community.html">|Community|</a>
-      <a href="support.html">|Support|</a>
-    </nav>
-  </div>
+<header>
+  <img src="Logos/SIB Logo Wordmark.png" alt="SIB Logo">
+  <h1>The Student Initiative Board</h1>
+  <p>"By The Students, For The Students."</p>
 </header>
 
 <main>
 <section class="team-section">
   <h2>Our Team</h2>
-
-  <div class="recruitment-banner">
-    <h3>🚀 We are looking for a Chief Logistics Officer (CLO)!</h3>
-    <p>If you are passionate about organising events, managing logistics, and driving student-led initiatives, we’d love to hear from you. <a href="join.html" style="color:white; text-decoration:underline;">Apply Now</a></p>
-  </div>
-
   <div class="team-cards">
 
     <div class="team-card mikaeel">
@@ -170,6 +89,9 @@
       <h3>Mikaeel Muazaam</h3>
       <span class="role">Founder & CEO</span>
       <p class="quote">“I founded this organisation for all students to benefit, and will not waver until my goal is fulfilled. We’ve built so much, but it’s just the tip of the iceberg. In time the SIB will flourish, and the students along with us.”</p>
+      <a href="https://linkedin.com/in/example" target="_blank" style="display:inline-block; width:10%; height:10%;">
+        <img src="linkedin.png" alt="LinkedIn" style="width:100%; height:100%; object-fit:contain;">
+      </a>
     </div>
 
     <div class="team-card ayaan">
@@ -177,19 +99,28 @@
       <h3>Ayaan Dhalait</h3>
       <span class="role">Head of the SWC and CTO</span>
       <p class="quote">“CTO of SIB, dev, and coding club lead. Honestly, I just mess around on my laptop, throw together some spaghetti code, and somehow it works. In the end I always have tools, projects, and random bug fixes that make more bugs but somehow that actually help students get motivation and keep doing this stuff and keeps our website, apps, etc running."</p>
+      <a href="https://linkedin.com/in/example" target="_blank" style="display:inline-block; width:10%; height:10%;">
+        <img src="linkedin.png" alt="LinkedIn" style="width:100%; height:100%; object-fit:contain;">
+      </a>
     </div>
 
     <div class="team-card shaurya">
       <h3>Shaurya Swarana</h3>
       <span class="role">COO</span>
       <p class="quote">"Quote To Be Added"</p>
+      <a href="https://linkedin.com/in/example" target="_blank" style="display:inline-block; width:10%; height:10%;">
+        <img src="linkedin.png" alt="LinkedIn" style="width:100%; height:100%; object-fit:contain;">
+      </a>
     </div>
 
     <div class="team-card md_patel">
       <img src="md_patel.png" alt="Md Patel">
       <h3>Mohommed Sahir Patel</h3>
-      <span class="role">Technological Management</span>
+      <span class="role">Lead Graphics Designer</span>
       <p class="quote">"I love to tinker around on my laptop. I designed many of the elegant logos of the organisation and helped in graphic design too. Ever since I joined in October 2024, it has been an inspiring journey. I look forward to continuing to make a positive difference."</p>
+      <a href="https://linkedin.com/in/example" target="_blank" style="display:inline-block; width:10%; height:10%;">
+        <img src="linkedin.png" alt="LinkedIn" style="width:100%; height:100%; object-fit:contain;">
+      </a>
     </div>
 
     <div class="team-card leia">
@@ -197,6 +128,9 @@
       <h3>Leia Redden</h3>
       <span class="role">Co-ordination and Social Networking</span>
       <p class="quote">"Quote to be added"</p>
+      <a href="https://linkedin.com/in/example" target="_blank" style="display:inline-block; width:10%; height:10%;">
+        <img src="linkedin.png" alt="LinkedIn" style="width:100%; height:100%; object-fit:contain;">
+      </a>
     </div>
 
     <div class="team-card nishtha">
@@ -204,24 +138,18 @@
       <h3>Nishtha Sehgal</h3>
       <span class="role">Outreach and Recruitments</span>
       <p class="quote">"Quote To be added"</p>
+      <a href="https://linkedin.com/in/example" target="_blank" style="display:inline-block; width:10%; height:10%;">
+        <img src="linkedin.png" alt="LinkedIn" style="width:100%; height:100%; object-fit:contain;">
+      </a>
     </div>
+
   </div>
 </section>
+
 </main>
 
 <footer>
   <p>© 2025 Student Initiative Board</p>
-  <p>Contact: ceo.sib.online@gmail.com | social.sib.online@gmail.com</p>
-  <div class="socials">
-    <a href="https://www.youtube.com">YouTube</a>
-    <a href="https://www.instagram.com">Instagram</a>
-  </div>
 </footer>
-
 </body>
 </html>
-
-
-
-
-
