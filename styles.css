@@ -447,3 +447,8 @@ footer .contact p {
   text-decoration: underline;
   }
 
+img[src*="linkedin"] {
+  content: none !important;
+  background: none !important;
+}
+
