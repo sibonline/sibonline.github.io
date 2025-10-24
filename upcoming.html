@@ -54,26 +54,9 @@
 </section>
 </main>
 <footer>© 2025 Student Initiative Board</footer>
-<script>
-document.addEventListener("DOMContentLoaded",function(){
-  const links=document.querySelectorAll("nav a");
-  links.forEach(link=>{
-    if(link.href === window.location.href){
-      link.classList.add("hidden");
-    }
-    link.addEventListener("click",function(e){
-      e.preventDefault();
-      const href=this.href;
-      document.body.style.opacity="0";
-      setTimeout(()=>{window.location=href},500);
-    });
-  });
-});
-window.onload=function(){document.body.style.opacity="1"}
-</script>
-
 </body>
 </html>
+
 
 
 
